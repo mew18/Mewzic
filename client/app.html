@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>MEWZIC</title>
+        <script src="app.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="app.css">
+    </head>
+
+    <body>
+        <div class="bg"></div>
+        <!-- add a navbar and a footer -->
+        <div class="upload">
+            <form action="http://localhost:666" method="POST" enctype="multipart/form-data">
+
+                <label for="file">Upload a <b>midi</b> music file : </label>
+                <br>
+                <input type="file" name="file" />
+                <br>                
+                <input type="submit" />
+                
+            </form>
+            <hr>
+        </div>
+
+        <div class="process">
+
+            <button class="gen">Process !</button>
+            <p>Generating new music ...</p>
+            <!-- add a new process circle from bootstrap4 -->
+            <hr>
+        </div>
+
+        <div class="show">
+            <button>Button <i class="fa fa-play-circle"></i></button>
+        </div>
+    </body>
+
+</html>
