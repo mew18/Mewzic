@@ -1,1 +1,0 @@
-timidity output.mid -Ow -o output.mp3
