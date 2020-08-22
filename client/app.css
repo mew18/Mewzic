@@ -30,7 +30,7 @@
    padding-bottom: 2rem; 
 }
 
-button
+button,.pr-btn,.ip-btn,.sub-1
 {
    font-size: 1.4rem !important; 
 }
@@ -55,6 +55,7 @@ hr
   left: 0;
   z-index: -1;
 }
+
 
 body
 { 
