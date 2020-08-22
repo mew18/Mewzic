@@ -14,29 +14,35 @@
     <body>
         <div class="bg"></div>
         <!-- add a navbar and a footer -->
-        <div class="upload">
-            <form action="http://localhost:666" method="POST" enctype="multipart/form-data">
 
-                <label for="file">Upload a <b>midi</b> music file : </label>
+        <div class="upload">
+            <form action="http://localhost:666/get" method="POST" enctype="multipart/form-data">
+
+                <label for="file" class="ip-btn"><h3>Upload a midi music file : </h3></label>
                 <br>
                 <input type="file" name="file" />
                 <br>                
-                <input type="submit" />
-                
+                <input type="submit" class="sub-1" value="submit"/>                
             </form>
             <hr>
         </div>
 
-        <div class="process">
+        <form action="http://localhost:666/predict" method="POST" class="process">
+            <input type="submit" name="upvote" value="Generate" class="pr-btn"/>
+        </form>
 
-            <button class="gen">Process !</button>
-            <p>Generating new music ...</p>
-            <!-- add a new process circle from bootstrap4 -->
-            <hr>
-        </div>
+        <hr>
 
         <div class="show">
-            <button>Button <i class="fa fa-play-circle"></i></button>
+
+            <audio id="myAudio">
+                <source src="../server/user_data/output.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+                <h5>Your song has been generated click to listen</h5>
+            <button onclick="mplay()" type="button">Play </button>
+            <button onclick="mpause()" type="button">Pause <i class="fa fa-pause "></i></button>
+            <!-- <i class="fa fa-play-circle"></i> -->
         </div>
     </body>
 
