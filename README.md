@@ -9,9 +9,10 @@
 #####   3)Model: 
         A Bi directional LSTM created from keras with tensorflow as the backend, with over 3,616,008 parameters
 
-### The project is about 80% complete , with a lot to add always :)
 
-Here's what the full stack app looks like :
+
+### Here's what the full stack app looks like :
 
 ![Website](SnapShot.png)
 
+#### The project is about 80% complete , with a lot to add always :)
