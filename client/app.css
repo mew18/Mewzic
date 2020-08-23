@@ -1,54 +1,33 @@
-.upload,.show
+.upload,.user-show,.nn-show,.process
 {
-    margin: 2rem;
+    margin: 3rem;
     text-align: center;
-    padding: 2rem;
+    padding: 1rem;
     font-size: 2rem;
+    /* margin-bottom: 2rem; */
     padding-bottom: 1rem;
 }
 
-.mid,.submit
+.gap
 {
-    font-size: 1rem !important;
-}
-.submit
-{
-    margin-bottom: 2rem;
+    margin: 3rem;
 }
 
-.process
+iframe
 {
-    text-align: center;
-    /* padding-bottom: 2rem; */
-    padding: 2rem;
-    padding-top: 0;
-    font-size: 1.4rem;
-}
-
-.process p
-{
-   padding-bottom: 2rem; 
-}
-
-button,.pr-btn,.ip-btn,.sub-1
-{
-   font-size: 1.4rem !important; 
-}
-
-hr
-{
-    color: black;
+    width: 45%;
+    margin: 10px;
+    border: none;
+    color:#1a517bfb;
+    box-shadow: 0px 0px 59px -4px rgba(0,0,0,1);
 }
 
 .bg
 {
-   background: url('./assests/bg.png');
-  /* background-repeat: no-repeat; */
-  /* background-size: auto; */
+  background: url('./assests/bg.png');
   background-size:100% 100%;
-  -webkit-filter: blur(5px);
-  /* filter: blur(2px); */
   position: fixed;
+  filter: blur(3px); 
   width: 100%;
   height: 100%;
   top: 0;
@@ -56,10 +35,57 @@ hr
   z-index: -1;
 }
 
+.audio_ctrl
+{
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
 
 body
 { 
- font-family: 'Merriweather', serif;  
+  font-family: 'Merriweather', serif;  
   position: relative;
   color: white;
+  width: 100%;
+  text-shadow: 3px 3px 0px #000000;
+  box-shadow: #000000;
+  box-shadow: 0px 0px 60px -8px rgba(0,0,0,1);
+}
+
+#file
+{
+    font-size:20px;
+    border: none;
+    box-shadow: 0px 0px 60px -4px rgba(0,0,0,1);  
+    border-radius: 40px;
+    margin-bottom: 2.3rem;
+    width: 30%;    
+} 
+
+[value="Create Music"],[value="Upload"],.choose::-webkit-file-upload-button
+{
+    color: #194F77;
+    background: #ffffff;
+    border: none;
+    box-shadow: 0px 0px 59px -4px rgba(0,0,0,1);
+    padding: 12px 20px;
+    font-weight: 700;
+    border-radius: 3px;
+    border-radius: 40px;
+    font-size: 20px;
+    cursor:pointer;
+
+}
+
+@media screen and (max-width: 720px )
+{
+    #file
+    {
+        width: 100%;
+    }
+
+    iframe
+    {
+        width: 100%;
+    }
 }
