@@ -4,46 +4,85 @@
     <head>
         <title>MEWZIC</title>
         <script src="app.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">  
         <link rel="stylesheet" href="app.css">
+        <link rel="stylesheet" href="assests/js/bootstrap.min.js">
+        <!-- <link rel="stylesheet" href="assests/css/bootstrap.min.css"> -->
     </head>
 
     <body>
-        <div class="bg"></div>
+        <div class="bg">hi</div>
         <!-- add a navbar and a footer -->
 
         <div class="upload">
-            <form action="http://localhost:666/get" method="POST" enctype="multipart/form-data">
 
-                <label for="file" class="ip-btn"><h3>Upload a midi music file : </h3></label>
-                <br>
-                <input type="file" name="file" />
-                <br>                
-                <input type="submit" class="sub-1" value="submit"/>                
+            <form action="http://localhost:666/get" method="POST" enctype="multipart/form-data" target="_none">
+
+                <label for="file" class="ip-btn">
+                    <h4>Upload a midi music file </h2>
+                </label>
+
+                <!-- <br> -->
+                <div class=file-btn>
+                    <input type="file" id="file" class="choose"></input>
+                </div>
+                <!-- <br> -->
+
+                <div class="upld-btn">
+                    <input type="submit" class="sub-1" value="Upload" />
+                </div>
+                <!-- try to add this to button <i class="fa fa-upload"></i> -->
             </form>
+
+            <br>
             <hr>
         </div>
 
-        <form action="http://localhost:666/predict" method="POST" class="process">
-            <input type="submit" name="upvote" value="Generate" class="pr-btn"/>
-        </form>
 
-        <hr>
-
-        <div class="show">
-
-            <audio id="myAudio">
-                <source src="../server/user_data/output.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-                <h5>Your song has been generated click to listen</h5>
-            <button onclick="mplay()" type="button">Play </button>
-            <button onclick="mpause()" type="button">Pause <i class="fa fa-pause "></i></button>
-            <!-- <i class="fa fa-play-circle"></i> -->
+        <div class="nn-process">
+            <form action="http://localhost:666/predict" method="POST" class="process">
+                <input type="submit" name="upvote" value="Create Music" class="pr-btn" />
+            </form>
         </div>
+
+        <div class="user-show">
+            <hr>
+            <h5>Your music has been created click to listen </h5>
+
+            <audio controls class="audio_ctrl">
+                <source src="../server/user_data/output.mp3" type="audio/mpeg">
+                <!-- Your browser does not support the audio element. -->
+            </audio>
+            <!-- <hr> -->
+        </div>
+
+        <div class="gap">
+            <hr>
+        </div>
+
+        <div class="nn-show">
+            <h5>Listen to some other music that the neural network has generated </h5>
+
+            <iframe width="40%" height="140"
+                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/694968424&color=%232d8ae0&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+            <br>
+            <iframe width="40%" height="140"
+                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/694968424&color=%232d8ae0&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+            <br>
+            <iframe width="40%" height="140"
+                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/694968424&color=%232d8ae0&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+            <br>
+            <iframe width="40%" height="140"
+                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/694968424&color=%232d8ae0&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+            <br>
+            <iframe width="40%" height="140"
+                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/694968424&color=%232d8ae0&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+            <br>
+            <iframe width="40%" height="140"
+                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/694968424&color=%232d8ae0&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+
+        </div>
+
     </body>
 
 </html>
