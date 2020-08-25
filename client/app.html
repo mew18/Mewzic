@@ -7,21 +7,35 @@
         <link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="app.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    
+
     </head>
 
     <body>
-        
-        <nav>
+        <div class="bg"></div>
+
+        <nav class=navbar>
             <ul class="topnav" id="hambg">
-                <li><a href="#nn-show">MEWZIC</a></li>
-                <li class="topnav-right git"><a class="git-hover" href="https://github.com/mew18/Mewzic"><span>Learn More</span></a></li>               
+
+                <li><a href="#demo">MEWZIC</a></li>
+                <li class="topnav-right git"><a class="git-hover" href="https://github.com/mew18/Mewzic"><span>Learn
+                            More</span></a></li>
+
                 <li class="dropdownIcon"><a href="javascript:void(0);" onclick="dropdownMenu()">&#9776;</a></li>
             </ul>
         </nav>
 
-        <div class="bg"></div>
-        <!-- add a navbar and a footer -->
+        <div class="gap">
+            <hr>
+        </div>
+        
+        <div class="intro">
+            <h2 class="intro-text"><span>What is MEWZIC ?</span> </h2>
+            <h2 class="intro-text">A LSTM network based on the B-RNN architecture that composes music from scrath with Flask server as the backend !</h2>
+        </div>
+
+        <div class="gap">
+            <hr>
+        </div>
 
         <div class="upload">
 
@@ -47,7 +61,6 @@
             <hr>
         </div>
 
-
         <div class="nn-process">
             <form action="http://localhost:666/predict" method="POST" class="process">
                 <input type="submit" name="upvote" value="Create Music" class="pr-btn" />
@@ -56,7 +69,7 @@
 
         <div class="user-show">
             <hr>
-            <h5>Your music has been created click to listen </h5>            
+            <h4>Your music has been created click to listen </h4>
 
             <audio controls class="audio_ctrl">
                 <source src="../server/user_data/output.mp3" type="audio/mpeg">
@@ -69,8 +82,8 @@
             <hr>
         </div>
 
-        <div class="nn-show">
-            <h5>Listen to some other music that the neural network has generated </h5>
+        <div class="nn-show" id="demo">
+            <h4>Listen to some other music that the neural network has generated </h4>
 
             <iframe width="40%" height="140"
                 src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/694968424&color=%232d8ae0&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
@@ -92,6 +105,45 @@
 
         </div>
 
+        <footer class="foot">
+            <a href="http://www.prankspace.com/">
+                <div class="row">
+                    <div class="col-3">
+                        <h1>Look</h1>
+                        <ul>
+                            <li>why</li>
+                            <li>did</li>
+                            <li>the</li>
+                        </ul>
+                    </div>
+                    <div class="col-3">
+                        <h1>MoM</h1>
+                        <ul>
+                            <li>chicken</li>
+                            <li>cross</li>
+                            <li>the </li>
+                        </ul>
+                    </div>
+                    <div class="col-3">
+                        <h1>a</h1>
+                        <ul>
+                            <li>road ?</li>
+                            <li>because</li>
+                            <li>he</li>
+                        </ul>
+                    </div>
+                    <div class="col-3">
+                        <h1>Website</h1>
+                        <ul>
+                            <li>wanted</li>
+                            <li>to</li>
+                            <li>die !! </li>
+                        </ul>
+                    </div>
+                </div>
+            </a>
+        </footer>
+        
 
         <script>
             function dropdownMenu() {
