@@ -4,14 +4,25 @@
     <head>
         <title>MEWZIC</title>
         <script src="app.js"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">  
+        <link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="app.css">
-        <link rel="stylesheet" href="assests/js/bootstrap.min.js">
-        <!-- <link rel="stylesheet" href="assests/css/bootstrap.min.css"> -->
+    
     </head>
 
     <body>
-        <div class="bg">hi</div>
+        <nav>
+            <ul class="topnav" id="hambg">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#news">News</a></li>
+                <li><a href="#contant">Contact Us</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li class="topnav-right"><a href="#signup">Sign Up</a></li>
+                <li class="topnav-right"><a href="#signin ">Sign in</a></li>
+                <li class="dropdownIcon"><a href="javascript:void(0);" onclick="dropdownMenu()">&#9776;</a></li>
+            </ul>
+        </nav>
+
+        <div class="bg"></div>
         <!-- add a navbar and a footer -->
 
         <div class="upload">
@@ -47,7 +58,7 @@
 
         <div class="user-show">
             <hr>
-            <h5>Music generated, click to listen </h5>
+            <h5>Your music has been created click to listen </h5>
 
             <audio controls class="audio_ctrl">
                 <source src="../server/user_data/output.mp3" type="audio/mpeg">
@@ -83,6 +94,20 @@
 
         </div>
 
+
+        <script>
+            function dropdownMenu() {
+                var ham = document.getElementById("hambg");
+                if (ham.className === "topnav") {
+                    ham.className += " responsive";
+                }
+
+                else {
+                    ham.className = "topnav";
+                }
+            }
+
+        </script>
     </body>
 
 </html>
