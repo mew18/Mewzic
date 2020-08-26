@@ -13,6 +13,6 @@
 
 ### Here's what the full stack app looks like :
 
-![Website](SnapShot.png)
+![Website](Website.png)
 
 #### The project is about 80% complete , with a lot to add always :)
