@@ -133,6 +133,7 @@ ul.topnav li a:hover,footer.foot ul li:hover,footer.foot h1
   text-shadow: 0px 0px 30px #000000fb;
   box-shadow: 0px 0px 20px 10px rgba(0,0,0,0.5);
   text-align: center;
+  border-radius: 8px;
 }
 
 ul.topnav li.dropdownIcon
@@ -172,6 +173,7 @@ ul.topnav li.dropdownIcon
   font-size: 1.8rem;
   content: "\f09b";
 }
+
 
 [value="Create Music"]:hover, [value="Upload"]:hover, .choose::-webkit-file-upload-button:hover
 {
@@ -236,6 +238,7 @@ footer.foot
 footer.foot a
 {
   text-decoration: none;
+  
 }
 
 footer.foot h1
@@ -247,7 +250,8 @@ footer.foot h1
   font-size:1.8rem;
   margin: 1rem;
   padding-left: 0;
-  padding:0.5rem
+  padding:0.5rem;
+  /* font-size:1.5rem; */
   
 }
 
@@ -266,11 +270,16 @@ footer.foot ul
 footer.foot ul li
 {
   color: #225A85;
-  font-size: 20px;
+  /* font-size: 20px; */
   padding-inline-start: 0px;
   /* padding:0 */
   padding-right: 0;
-  
+  font-size:1.2rem
+}
+
+footer.foot .report li,footer.foot .gt-proj li
+{
+  padding:0.9rem;
 }
 
 .row
@@ -292,6 +301,7 @@ footer.foot ul li
   padding: 0;
 }
 
+
 @media screen and (max-width: 720px )
 {
   #file
@@ -308,6 +318,7 @@ footer.foot ul li
   {
     width: 100%;
   }
+
   ul.topnav li:not(:nth-child(1))
   {
     display: none;
