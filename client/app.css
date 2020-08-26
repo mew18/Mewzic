@@ -25,7 +25,7 @@ iframe
 
 .bg
 {
-  background: url('./assests/bg.png');
+  background: url('bg.png');
   background-size:100% 100%;
   position: fixed;
   filter: blur(3px); 
@@ -63,17 +63,16 @@ body
 
 [value="Create Music"],[value="Upload"],.choose::-webkit-file-upload-button
 {
-    color: #194F77;
-    background: #ffffff;
-    border: none;
-    box-shadow: 0px 0px 59px -4px rgba(0,0,0,1);
-    padding: 12px 20px;
-    font-weight: 700;
-    border-radius: 3px;
-    border-radius: 40px;
-    font-size: 20px;
-    cursor:pointer;
-
+  color: #194F77;
+  background: #ffffff;
+  border: none;
+  box-shadow: 0px 0px 59px -4px rgba(0,0,0,1);
+  padding: 12px 20px;
+  font-weight: 700;
+  border-radius: 3px;
+  border-radius: 40px;
+  font-size: 20px;
+  cursor:pointer;
 }
 
 nav
