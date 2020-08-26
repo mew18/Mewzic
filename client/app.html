@@ -2,12 +2,15 @@
 <html lang="en">
 
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
         <title>MEWZIC</title>
-        <script src="app.js"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="app.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+        <link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="app.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='/app.css')}}">
     </head>
 
     <body>
@@ -40,17 +43,15 @@
 
         <div class="upload">
 
-            <form action="http://localhost:666/get" method="POST" enctype="multipart/form-data" target="_none">
+            <form action="http://127.0.0.1:5000/upload" method="POST" enctype="multipart/form-data">
 
                 <label for="file" class="ip-btn">
                     <h4>Upload a midi music file </h2>
                 </label>
 
-                <!-- <br> -->
                 <div class=file-btn>
-                    <input type="file" id="file" class="choose"></input>
+                    <input type="file" id="file" name="file" class="choose"></input>
                 </div>
-                <!-- <br> -->
 
                 <div class="upld-btn">
                     <input type="submit" class="sub-1" value="Upload" />
@@ -63,7 +64,7 @@
         </div>
 
         <div class="nn-process">
-            <form action="http://localhost:666/predict" method="POST" class="process">
+            <form action="http://127.0.0.1:5000/predict" method="POST" class="process">
                 <input type="submit" name="upvote" value="Create Music" class="pr-btn" />
             </form>
         </div>
