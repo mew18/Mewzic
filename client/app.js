@@ -1,36 +1,29 @@
-// function onPageLoad()
-// {
+var f = document.getElementById('mid').value.toLowerCase();
 
-// }
-
-
-function get_mid()
+function validate() 
 {
+    if (f.endsWith('.mid') || f.endsWith('.midi')) 
+    {
+        alert(Uploaded)
+    }
+
+    else 
+    {
+        alert("Please upload midi file !")
+    }
+
 }
 
-function validate()
-{
-    var f = document.getElementById('mid').value.toLowerCase();
-
-    if(!f || f=="")
+function flash()
+{   
+    if (f.endsWith('.mid') || f.endsWith('.midi')) 
     {
-        alert("File cannot be empty !")
+        alert("Generating Music")
     }
 
-    else if (!f.endsWith('.mid') && !f.endsWith('.midi')) 
+    else 
     {
-        alert('Please upload midi file only.');
-        return false;
-    }
+        alert("Error !")
 
-    else
-    {
-        alert("Uploaded !")
-        get_mid()
     }
-
-       
 }
-
-
-// window.onload=onPageLoad
