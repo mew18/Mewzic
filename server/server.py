@@ -4,8 +4,7 @@ import os
 from werkzeug.utils import redirect, secure_filename
 
 # instance relative config allows u to change dir path VIMP
-server = Flask(__name__, instance_relative_config=True,
-               template_folder='../client/')
+server = Flask(__name__, instance_relative_config=True,template_folder='../client/')
 server.static_folder = '../client/'
 server.secret_key = "joe mama"
 
@@ -22,25 +21,30 @@ def get_mid():
             uploads_dir = os.path.join(server.instance_path, 'user_data')
             os.makedirs(uploads_dir, exist_ok=True)
             f.save(os.path.join(uploads_dir, secure_filename(f.filename)))
-            # return redirect(url_for('pause'))
-            return render_template('app.html')
+            flash("Generated")
+            # return render_template('app.html') # add a flash
         except:
-            return "Error in Uploading file, Please try again"
-            # return redirect(url_for('pause'))
-    # return render_template('app.html')
-    # return redirect(url_for('pause'))
-    return "Please select a valid midi file"
+            flash("Generated")
+            # return "Please Upload a valid midi file"
+    flash("Generated")
+    return render_template('app.html')
+    # return "Error in Uploading midi file, Please try again"
 
 @server.route("/predict", methods=["POST", "GET"])
 def predict():
     if request.method == 'POST':
         try:
-            # print(transform.generate())
-            return render_template('app.html')
+            # transform.generate()
+            print("GENERATING.....")
+            flash("Generated")
+            # return render_template('app.html') # add a flash
         except:
+            flash("Generated")
             return "Error in generating music"
+    flash("Generated")
     return "Error in the predict function "
 
 if __name__ == "__main__":
     print("SERVER started in BackGround")
     server.run(host="127.0.0.1", port="5000", debug=True)
+ 
