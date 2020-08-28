@@ -11,7 +11,6 @@
 
         <link rel="stylesheet" href="app.css">
         <link rel="stylesheet" href="{{ url_for('static', filename='/app.css')}}">
-        <script src="app.js"></script>
     </head>
 
     <body>
@@ -61,6 +60,15 @@
             </form>
 
             <br>
+            <div class="flash">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <center><h4>{{ message }}</h4></center>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
             <hr class="line">
         </div>
 
@@ -68,6 +76,17 @@
             <form action="http://127.0.0.1:5000/predict" method="POST" class="process">
                 <input type="submit" value="Create Music" class="pr-btn" onclick="flash()"/>
             </form>
+
+            <div class="flash">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <center><h4>{{ message }}</h4></center>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+                            
         </div>
 
         <div class="user-show">
@@ -76,6 +95,7 @@
 
             <audio controls class="audio_ctrl">
                 <source src="../server/user_data/output.mp3" type="audio/mpeg">
+                     <!-- <source src="./output.mp3" type="audio/mpeg"> -->
                 <!-- Your browser does not support the audio element. -->
             </audio>
             <!-- <hr> -->
@@ -187,6 +207,9 @@
             }
 
         </script>
+        
+        <script src="app.js"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='/app.js')}}"></script>
     </body>
 
 </html>
