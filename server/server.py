@@ -1,19 +1,20 @@
-from flask import Flask, request, render_template, flash, redirect, url_for
+from flask import Flask, request, render_template, flash, redirect
 # import transform
+import find_mid
 import os
 from werkzeug.utils import redirect, secure_filename
 
 # instance relative config allows u to change dir path VIMP
-server = Flask(__name__, instance_relative_config=True,template_folder='../client/')
+server = Flask(__name__, instance_relative_config=True, template_folder='../client/')
 server.static_folder = '../client/'
 server.secret_key = "joe mama"
 
-@server.route('/')
-def upload_file():
+@server.route('/')  # this decides if you need to run html or not
+def init():
     return render_template('app.html')
 
 @server.route("/upload", methods=["POST", "GET"])
-def get_mid():
+def upload():
     if request.method == 'POST':
         try:
             f = request.files["file"]
@@ -21,30 +22,36 @@ def get_mid():
             uploads_dir = os.path.join(server.instance_path, 'user_data')
             os.makedirs(uploads_dir, exist_ok=True)
             f.save(os.path.join(uploads_dir, secure_filename(f.filename)))
-            flash("Generated")
-            # return render_template('app.html') # add a flash
+            flash("Uploaded",'upload')
+            return redirect(request.referrer)
         except:
-            flash("Generated")
-            # return "Please Upload a valid midi file"
-    flash("Generated")
-    return render_template('app.html')
-    # return "Error in Uploading midi file, Please try again"
+            return "Catch :Error in Uploading ,Please Upload a valid midi file"
+    else:
+        return redirect(request.referrer)
+        # return redirect(url_for('upload'))
+        # return render_template('app.html')
+        # return "Else :Error in Uploading midi file, Please try again"
 
 @server.route("/predict", methods=["POST", "GET"])
 def predict():
     if request.method == 'POST':
         try:
-            # transform.generate()
-            print("GENERATING.....")
-            flash("Generated")
-            # return render_template('app.html') # add a flash
+            if find_mid.mid_exist()==True:
+                # transform.generate()
+                flash("Generated",'predict')
+                return redirect(request.referrer)
+                # return redirect(url_for('predict'))
+                # return render_template('app.html')
+            else:
+                return "Please Upload a valid midi file, then Generate Music"
         except:
-            flash("Generated")
-            return "Error in generating music"
-    flash("Generated")
-    return "Error in the predict function "
+            return "Catch: Error in Generating Music"
+    else:
+        return redirect(request.referrer)
+        # return redirect(url_for('predict'))
+        # return render_template('app.html')
+        # return "Else: Error in the predict function "
 
 if __name__ == "__main__":
     print("SERVER started in BackGround")
     server.run(host="127.0.0.1", port="5000", debug=True)
- 
