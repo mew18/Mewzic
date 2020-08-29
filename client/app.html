@@ -60,11 +60,11 @@
             </form>
 
             <br>
-            <div class="flash">
-                {% with messages = get_flashed_messages() %}
+            <div class="flash1">
+                {% with messages = get_flashed_messages(category_filter=["upload"]) %}
                     {% if messages %}
                         {% for message in messages %}
-                            <center><h4>{{ message }}</h4></center>
+                            {{ message }}
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
@@ -76,22 +76,20 @@
             <form action="http://127.0.0.1:5000/predict" method="POST" class="process">
                 <input type="submit" value="Create Music" class="pr-btn" onclick="flash()"/>
             </form>
-
-            <div class="flash">
-                {% with messages = get_flashed_messages() %}
+            <div class="flash2">
+                {% with messages = get_flashed_messages(category_filter=["predict"]) %}
                     {% if messages %}
                         {% for message in messages %}
-                            <center><h4>{{ message }}</h4></center>
+                            {{ message }}
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
             </div>
-                            
         </div>
 
         <div class="user-show">
             <hr class="line">
-            <h4>Your music has been created click to listen </h4>
+            <h4>Music generated, click to play </h4>
 
             <audio controls class="audio_ctrl">
                 <source src="../server/user_data/output.mp3" type="audio/mpeg">
