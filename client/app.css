@@ -236,30 +236,27 @@ hr.line
  
 }
 
-.flash
+.flash1, .flash2
 {
-  color:red;
+  color:rgb(255, 255, 255);
+  /* text-shadow: none; */
+  background-color: #194F77;
+  /* width: 100%; */
+  /* margin:auto; */
+  text-align: center;
+  font-size: 1rem !important;
+  border-style: solid;
+  border-radius: 15px;
+  margin-right: 5rem;
+  margin-left: 5rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.2rem;
+  padding-left: 0;
+  padding-right: 0;
   /* display: none; */
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
 
 footer.foot
 {
