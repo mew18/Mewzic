@@ -11,6 +11,8 @@
 
         <link rel="stylesheet" href="app.css">
         <link rel="stylesheet" href="{{ url_for('static', filename='/app.css')}}">
+        <source src="./output.mp3" type="audio/mpeg">
+        
     </head>
 
     <body>
@@ -60,11 +62,11 @@
             </form>
 
             <br>
-            <div class="flash1">
+            <div class="flash">
                 {% with messages = get_flashed_messages(category_filter=["upload"]) %}
                     {% if messages %}
                         {% for message in messages %}
-                            {{ message }}
+                            <div class="msg1">{{ message }}</div>
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
@@ -76,11 +78,11 @@
             <form action="http://127.0.0.1:5000/predict" method="POST" class="process">
                 <input type="submit" value="Create Music" class="pr-btn" onclick="flash()"/>
             </form>
-            <div class="flash2">
+            <div class="flash">
                 {% with messages = get_flashed_messages(category_filter=["predict"]) %}
                     {% if messages %}
                         {% for message in messages %}
-                            {{ message }}
+                            <div class="msg2">{{ message }}</div>
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
@@ -92,11 +94,10 @@
             <h4>Music generated, click to play </h4>
 
             <audio controls class="audio_ctrl">
-                <source src="../server/user_data/output.mp3" type="audio/mpeg">
-                     <!-- <source src="./output.mp3" type="audio/mpeg"> -->
-                <!-- Your browser does not support the audio element. -->
+                <source src = "{{ url_for('static', filename='/output.mp3')}}"  type="audio/mpeg">
+                Your browser does not support the audio element.
             </audio>
-            <!-- <hr> -->
+
         </div>
 
         <div class="gap">
