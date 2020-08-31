@@ -2,10 +2,8 @@ import os
 import sys
 from collections import Counter
 from music21 import *
-from keras.models import load_model
 import numpy as np
 
-model = load_model('./model/mewzic_model.h5')
 
 def read_midi(file):
 
@@ -29,10 +27,13 @@ def read_midi(file):
             notes.append('.'.join(str(n) for n in element.normalOrder))
     return notes
 
-def transform():
+
+def generate():
+    from keras.models import load_model
+    model = load_model('./model/mewzic_model.h5')
     # Array Processing
     # specify the path
-    path = "/Users/MR_ME/Desktop/mewzic/server/user_upload_data/"  
+    path = "/Users/MR_ME/Desktop/mewzic/server/user_data/"
 
     # read all the filenames
     files = [i for i in os.listdir(path) if i.endswith(".mid")]
@@ -91,8 +92,9 @@ def transform():
         x_seq.append(temp)
     x_seq = np.array(x_seq)
 
-    start = np.random.randint(1, len(x_seq)-3)
-    x_int_to_note = dict((number, note_) for number, note_ in enumerate(unique_x))
+    start = np.random.randint(0, 50)
+    x_int_to_note = dict((number, note_)
+                         for number, note_ in enumerate(unique_x))
     seq = x_seq[start]
     predictions = []
     for i in range(64):
@@ -101,7 +103,7 @@ def transform():
         prediction = model.predict(pred_ip)
         index = np.argmax(prediction)
         result = x_int_to_note[index]
-        predictions.append(result)  
+        predictions.append(result)
         seq = np.append(seq, index)
         seq = seq[1:len(seq)]
 
@@ -132,13 +134,15 @@ def transform():
 
     midi_stream = stream.Stream(output_notes)
     # print(output_notes)
-    mpath = './user_output_data/user_output.mid'
+    # mpath = './user_output_data/user_output.mid'
+    mpath = '/Users/MR_ME/Desktop/mewzic/server/user_data/output.mid'
     midi_stream.write('midi', fp=mpath)
-    
+
+    os.chdir(r"C:\Users\MR_ME\Desktop\mewzic\server\user_data")
+    os.startfile("convert.bat")
+
     return "Generated"
 
 
-
-
 if __name__ == '__main__':
-    print(transform())
+    generate()
