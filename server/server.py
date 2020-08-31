@@ -1,4 +1,5 @@
-from flask import Flask, request, render_template, flash, redirect
+from flask import Flask, request, render_template, flash, redirect,send_from_directory
+import shutil
 # import transform
 import find_mid
 import os
@@ -38,6 +39,7 @@ def predict():
         try:
             if find_mid.mid_exist()==True:
                 # transform.generate()
+                shutil.move("./server/user_data/output.mp3", "client/")
                 flash("Generated",'predict')
                 return redirect(request.referrer)
                 # return redirect(url_for('predict'))
@@ -45,6 +47,7 @@ def predict():
             else:
                 return "Please Upload a valid midi file, then Generate Music"
         except:
+            # return redirect(request.referrer)
             return "Catch: Error in Generating Music"
     else:
         return redirect(request.referrer)
