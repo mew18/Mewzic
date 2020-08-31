@@ -236,25 +236,36 @@ hr.line
  
 }
 
-.flash1, .flash2
+.flash,.msg1,.msg2
 {
   color:rgb(255, 255, 255);
-  /* text-shadow: none; */
-  background-color: #194F77;
-  /* width: 100%; */
-  /* margin:auto; */
+  font-size: 1.2rem !important;
   text-align: center;
-  font-size: 1rem !important;
-  border-style: solid;
-  border-radius: 15px;
-  margin-right: 5rem;
-  margin-left: 5rem;
-  padding-top: 0.3rem;
-  padding-bottom: 0.2rem;
-  padding-left: 0;
-  padding-right: 0;
+  /* margin: auto; */
   /* display: none; */
 }
+
+.msg1,.msg2
+{
+  display: block !important;
+  background-color: #0A3D62;
+  border-style: solid;
+  border-radius: 40px;
+  text-shadow: 0px 0px 1px #000000;
+  box-shadow: 0px 0px 20px 1px rgba(0,0,0,0.4);
+  margin-right: 50rem;
+  margin-left: 50rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.2rem;
+}
+
+.msg2
+{
+  margin-right: 54rem;
+  margin-left: 54rem;
+}
+
+
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
