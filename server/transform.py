@@ -1,5 +1,5 @@
 import os
-import sys
+# import sys
 from collections import Counter
 from music21 import *
 import numpy as np
@@ -31,9 +31,12 @@ def read_midi(file):
 def generate():
     from keras.models import load_model
     model = load_model('./model/mewzic_model.h5')
+
     # Array Processing
     # specify the path
-    path = "/Users/MR_ME/Desktop/mewzic/server/user_data/"
+    
+    # path = "/Users/MR_ME/Desktop/mewzic/server/user_data/"
+    path= "./server/user_data/"
 
     # read all the filenames
     files = [i for i in os.listdir(path) if i.endswith(".mid")]
@@ -80,8 +83,7 @@ def generate():
     # numpy.ravel() == numpy.reshape(-1) aka flatten to a 1d array
     unique_x = list(set(x.ravel()))
     # creating a dict with key as note and value as freq count
-    x_note_to_int = dict((note_, number)
-                         for number, note_ in enumerate(unique_x))
+    x_note_to_int = dict((note_, number) for number, note_ in enumerate(unique_x))
 
     x_seq = []
     for i in x:
@@ -92,17 +94,19 @@ def generate():
         x_seq.append(temp)
     x_seq = np.array(x_seq)
 
-    start = np.random.randint(0, 50)
-    x_int_to_note = dict((number, note_)
-                         for number, note_ in enumerate(unique_x))
+    start = np.random.randint(0, len(x_seq)-1)
+    x_int_to_note = dict((number, note_) for number, note_ in enumerate(unique_x))
     seq = x_seq[start]
     predictions = []
-    for i in range(64):
+    for i in range(32):
         pred_ip = np.reshape(seq, (1, len(seq), 1))
-        pred_ip = pred_ip/len(pred_ip)
-        prediction = model.predict(pred_ip)
-        index = np.argmax(prediction)
-        result = x_int_to_note[index]
+        pred_ip = pred_ip / len(pred_ip)
+        prediction = model.predict(pred_ip)[0]
+        index = np.argmax(prediction,axis=0)
+        try:
+            result = x_int_to_note[index]
+        except:
+            continue
         predictions.append(result)
         seq = np.append(seq, index)
         seq = seq[1:len(seq)]
@@ -130,16 +134,24 @@ def generate():
             new_note.storedInstrument = instrument.Piano()
             output_notes.append(new_note)
         # increase offset each iteration so that notes do not stack
-        offset += 0.54
+        offset += 0.52
 
     midi_stream = stream.Stream(output_notes)
-    # print(output_notes)
-    # mpath = './user_output_data/user_output.mid'
-    mpath = '/Users/MR_ME/Desktop/mewzic/server/user_data/output.mid'
+    # #print(output_notes)
+
+    mpath = './server/user_data/output.mid'
+    # mpath = '/Users/MR_ME/Desktop/mewzic/server/user_data/output.mid'
+
     midi_stream.write('midi', fp=mpath)
 
-    os.chdir(r"C:\Users\MR_ME\Desktop\mewzic\server\user_data")
+    # os.chdir(r"C:\Users\MR_ME\Desktop\mewzic\server\user_data")
+    os.chdir("./server/user_data/")
     os.startfile("convert.bat")
+    import time
+    time.sleep(1)
+    print("Before moving to static")
+    os.rename('./server/user_data/output.mp3', './client/output.mp3')
+    print("After moving to static")
 
     return "Generated"
 
