@@ -1,13 +1,11 @@
-from flask import Flask, request, render_template, flash, redirect,send_from_directory
-import shutil
-# import transform
-import find_mid
+from flask import Flask, request, render_template, flash, redirect,url_for
 import os
-from werkzeug.utils import redirect, secure_filename
+from werkzeug.utils import secure_filename
 
 # instance relative config allows u to change dir path VIMP
 server = Flask(__name__, instance_relative_config=True, template_folder='../client/')
 server.static_folder = '../client/'
+                      
 server.secret_key = "joe mama"
 
 @server.route('/')  # this decides if you need to run html or not
@@ -37,12 +35,13 @@ def upload():
 def predict():
     if request.method == 'POST':
         try:
+            import find_mid
             if find_mid.mid_exist()==True:
-                # transform.generate()
-                shutil.move("./server/user_data/output.mp3", "client/")
+                import transform
+                print(transform.generate())
                 flash("Generated",'predict')
-                return redirect(request.referrer)
-                # return redirect(url_for('predict'))
+                return redirect(url_for('init'))
+                # return redirect(request.referrer)
                 # return render_template('app.html')
             else:
                 return "Please Upload a valid midi file, then Generate Music"
@@ -58,3 +57,4 @@ def predict():
 if __name__ == "__main__":
     print("SERVER started in BackGround")
     server.run(host="127.0.0.1", port="5000", debug=True)
+
