@@ -9,9 +9,9 @@
         <link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        <link rel="stylesheet" href="app.css">
+        <!-- <link rel="stylesheet" href="app.css"> -->
         <link rel="stylesheet" href="{{ url_for('static', filename='/app.css')}}">
-        <source src="./output.mp3" type="audio/mpeg">
+        <!-- <source src="./output.mp3" type="audio/mpeg"> -->
         
     </head>
 
@@ -94,7 +94,7 @@
             <h4>Music generated, click to play </h4>
 
             <audio controls class="audio_ctrl">
-                <source src = "{{ url_for('static', filename='/output.mp3')}}"  type="audio/mpeg">
+                <source src = "{{ url_for('static', filename='./output.mp3')}}"  type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
 
