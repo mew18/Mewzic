@@ -4,7 +4,6 @@ from collections import Counter
 from music21 import *
 import numpy as np
 
-
 def read_midi(file):
 
     print("Parsing: ", file)
@@ -98,14 +97,15 @@ def generate():
     x_int_to_note = dict((number, note_) for number, note_ in enumerate(unique_x))
     seq = x_seq[start]
     predictions = []
-    for i in range(32):
+    for i in range(64):
         pred_ip = np.reshape(seq, (1, len(seq), 1))
         pred_ip = pred_ip / len(pred_ip)
         prediction = model.predict(pred_ip)[0]
         index = np.argmax(prediction,axis=0)
         try:
             result = x_int_to_note[index]
-        except:
+        except Exception as e:
+            print(e)
             continue
         predictions.append(result)
         seq = np.append(seq, index)
@@ -147,14 +147,32 @@ def generate():
     # os.chdir(r"C:\Users\MR_ME\Desktop\mewzic\server\user_data")
     os.chdir("./server/user_data/")
     os.startfile("convert.bat")
+
+    print("------------------Before moving to static---------------------------")
     import time
     time.sleep(1)
-    print("Before moving to static")
-    os.rename('./server/user_data/output.mp3', './client/output.mp3')
-    print("After moving to static")
+    # os.chdir("./server/user_data/")
+    os.startfile("copy.bat")
 
+    # import shutil
+    # one way, but that is not so good is to output the mid to the static client folder and from there onwards do the conversion
+    # try:
+        # shutil.copy("./server/user_data/output.mp3", "client/")
+        # os.rename('./server/user_data/output.mp3', './client/output.mp3')
+        # print("In try ")
+    # except Exception as e:
+        # print(e)
+        # pass
+
+    print("------------------After moving to static-----------------------------")
+    print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
     return "Generated"
 
 
 if __name__ == '__main__':
     generate()
+    # import shutil
+    # shutil.copy("./server/user_data/output.mp3", "client/")
+    # os.rename('./server/user_data/output.mp3', './client/output.mp3')
+    # os.rename('./server/user_data/output.mp3', './client/output.mp3')
+
