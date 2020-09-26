@@ -15,4 +15,4 @@
 
 ![Website](Website.png)
 
-#### The project is about 80% complete , with a lot to add always :)
+#### Feel free to collaborate :)
