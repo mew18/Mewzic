@@ -29,13 +29,13 @@ def read_midi(file):
 
 def generate():
     from keras.models import load_model
-    model = load_model('./model/mewzic_model.h5')
+    model = load_model('../model/mewzic_model.h5')
 
     # Array Processing
     # specify the path
     
     # path = "/Users/MR_ME/Desktop/mewzic/server/user_data/"
-    path= "./server/user_data/"
+    path= "./user_data/"
 
     # read all the filenames
     files = [i for i in os.listdir(path) if i.endswith(".mid")]
@@ -134,45 +134,20 @@ def generate():
             new_note.storedInstrument = instrument.Piano()
             output_notes.append(new_note)
         # increase offset each iteration so that notes do not stack
-        offset += 0.52
+        offset += 0.48
 
     midi_stream = stream.Stream(output_notes)
     # #print(output_notes)
+    
+    print("------------------------------Generated Succesfuly------------------------")
 
-    mpath = './server/user_data/output.mid'
-    # mpath = '/Users/MR_ME/Desktop/mewzic/server/user_data/output.mid'
-
+# try to convert to mp3 and then move?
+    mpath = '../client/output.mid'
     midi_stream.write('midi', fp=mpath)
-
-    # os.chdir(r"C:\Users\MR_ME\Desktop\mewzic\server\user_data")
-    os.chdir("./server/user_data/")
-    os.startfile("convert.bat")
-
-    print("------------------Before moving to static---------------------------")
-    import time
-    time.sleep(1)
-    # os.chdir("./server/user_data/")
-    os.startfile("copy.bat")
-
-    # import shutil
-    # one way, but that is not so good is to output the mid to the static client folder and from there onwards do the conversion
-    # try:
-        # shutil.copy("./server/user_data/output.mp3", "client/")
-        # os.rename('./server/user_data/output.mp3', './client/output.mp3')
-        # print("In try ")
-    # except Exception as e:
-        # print(e)
-        # pass
-
-    print("------------------After moving to static-----------------------------")
+    print("------------------------------Moved Succesfuly------------------------")
     print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-    return "Generated"
+    return "Done"
 
 
 if __name__ == '__main__':
     generate()
-    # import shutil
-    # shutil.copy("./server/user_data/output.mp3", "client/")
-    # os.rename('./server/user_data/output.mp3', './client/output.mp3')
-    # os.rename('./server/user_data/output.mp3', './client/output.mp3')
-
