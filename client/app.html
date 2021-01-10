@@ -1,212 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
-        <title>MEWZIC</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+    <title>MEWZIC</title>
 
-        <link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        <!-- <link rel="stylesheet" href="app.css"> -->
-        <link rel="stylesheet" href="{{ url_for('static', filename='/app.css')}}">
-        <!-- <source src="./output.mp3" type="audio/mpeg"> -->
-        
-    </head>
+    <!-- <link rel="stylesheet" href="app.css"> -->
+    <!-- <script src="dropDown.js"></script> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='/app.css')}}">
+    <script src="{{url_for('static',filename='./dropDown.js')}}"></script>
+    <script
+        src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.21.0/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.1.0"></script>
+    <!-- <source src="./output.mp3" type="audio/mpeg"> -->
 
-    <body>
-        <div class="bg"></div>
+</head>
 
-        <nav class=navbar>
-            <ul class="topnav" id="hambg">
+<body>
+    dropdownMenu()
+    <div class="bg"></div>
 
-                <li><a href="#demo">MEWZIC</a></li>
-                <li class="topnav-right git"><a class="git-hover" href="https://github.com/mew18/Mewzic"><span>Learn
-                            More</span></a></li>
+    <nav class=navbar>
+        <ul class="topnav" id="hambg">
 
-                <li class="dropdownIcon"><a href="javascript:void(0);" onclick="dropdownMenu()">&#9776;</a></li>
-            </ul>
-        </nav>
+            <li><a href="#demo">MEWZIC</a></li>
+            <li class="topnav-right git"><a class="git-hover" href="https://github.com/mew18/Mewzic"><span>Learn
+                        More</span></a></li>
 
-        <div class="gap">
-            <hr class="line">
+            <li class="dropdownIcon"><a href="javascript:void(0);" onclick="dropdownMenu()">&#9776;</a></li>
+        </ul>
+    </nav>
+
+    <div class="gap">
+        <hr class="line">
+    </div>
+
+    <div class="intro">
+        <h2 class="intro-text"><span>What is MEWZIC ?</span> </h2>
+        <h2 class="intro-text">A LSTM network based on the B-RNN architecture that composes music from scrath with
+            Flask server as the backend !</h2>
+    </div>
+
+    <div class="gap">
+        <hr class="line">
+    </div>
+
+    <div class="upload">
+
+        <form action="http://127.0.0.1:5000/upload" method="POST" enctype="multipart/form-data">
+
+            <label for="file" class="ip-btn">
+                <h4>Upload a midi music file </h2>
+            </label>
+
+            <div class=file-btn>
+                <input type="file" id="file" name="file" class="choose" id="mid"></input>
+            </div>
+
+            <div class="upld-btn">
+                <input type="submit" class="sub-1" value="Upload" onclick="validate()" />
+            </div>
+            <!-- try to add this to button <i class="fa fa-upload"></i> -->
+        </form>
+
+        <br>
+        <div class="flash">
+            {% with messages = get_flashed_messages(category_filter=["upload"]) %}
+            {% if messages %}
+            {% for message in messages %}
+            <div class="msg1">{{ message }}</div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
         </div>
+        <hr class="line">
+    </div>
 
-        <div class="intro">
-            <h2 class="intro-text"><span>What is MEWZIC ?</span> </h2>
-            <h2 class="intro-text">A LSTM network based on the B-RNN architecture that composes music from scrath with
-                Flask server as the backend !</h2>
+    <div class="nn-process">
+        <form action="http://127.0.0.1:5000/predict" method="POST" class="process">
+            <input type="submit" value="Create Music" class="pr-btn" onclick="flash()" />
+        </form>
+        <div class="flash">
+            {% with messages = get_flashed_messages(category_filter=["predict"]) %}
+            {% if messages %}
+            {% for message in messages %}
+            <div class="msg2">{{ message }}</div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
         </div>
+    </div>
 
-        <div class="gap">
-            <hr class="line">
-        </div>
+    <div class="user-show">
+        <hr class="line">
+        <h4>Music generated, click to play </h4>
 
-        <div class="upload">
+        <midi-player src="{{ url_for('static', filename='output.mid')}}" sound-font visualizer="#myVisualizer"></midi-player>
+        <!-- ../server/user_data/output.mid -->
+    </div>
 
-            <form action="http://127.0.0.1:5000/upload" method="POST" enctype="multipart/form-data">
+    <div class="gap">
+        <hr class="line">
+    </div>
 
-                <label for="file" class="ip-btn">
-                    <h4>Upload a midi music file </h2>
-                </label>
+    <div class="nn-show" id="demo">
+        <h4>Listen to some music that the neural network has generated </h4>
 
-                <div class=file-btn>
-                    <input type="file" id="file" name="file" class="choose" id="mid"></input>
-                </div>
-
-                <div class="upld-btn">
-                    <input type="submit" class="sub-1" value="Upload" onclick="validate()"/>
-                </div>
-                <!-- try to add this to button <i class="fa fa-upload"></i> -->
-            </form>
-
+        <div class="show-vis">
+            <canvas id='canvas' width="500" height="250"></canvas>
             <br>
-            <div class="flash">
-                {% with messages = get_flashed_messages(category_filter=["upload"]) %}
-                    {% if messages %}
-                        {% for message in messages %}
-                            <div class="msg1">{{ message }}</div>
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
-            </div>
-            <hr class="line">
-        </div>
+            <p class="text">Best prediction so far</p>
 
-        <div class="nn-process">
-            <form action="http://127.0.0.1:5000/predict" method="POST" class="process">
-                <input type="submit" value="Create Music" class="pr-btn" onclick="flash()"/>
-            </form>
-            <div class="flash">
-                {% with messages = get_flashed_messages(category_filter=["predict"]) %}
-                    {% if messages %}
-                        {% for message in messages %}
-                            <div class="msg2">{{ message }}</div>
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
-            </div>
-        </div>
-
-        <div class="user-show">
-            <hr class="line">
-            <h4>Music generated, click to play </h4>
-
-            <audio controls class="audio_ctrl">
-                <source src = "{{ url_for('static', filename='./output.mp3')}}"  type="audio/mpeg">
+            <audio id="audio" controls preload="auto">
+                <source src="{{ url_for('static', filename='./bestPrediction.mp3')}}" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
 
+            <script src="{{url_for('static',filename='./visualize.js')}}"></script>
         </div>
 
-        <div class="gap">
-            <hr class="line">
-        </div>
+        <br>
 
-        <div class="nn-show" id="demo">
-            <h4>Listen to some other music that the neural network has generated </h4>
+        <iframe width="100%" height="140"
+            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/962338264&color=%233486c1&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+        <br>
 
-            <iframe width="40%" height="140"
-                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/694968424&color=%232d8ae0&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
-            <br>
-            <iframe width="40%" height="140"
-                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/694968424&color=%232d8ae0&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
-            <br>
-            <iframe width="40%" height="140"
-                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/694968424&color=%232d8ae0&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
-            <br>
-            <iframe width="40%" height="140"
-                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/694968424&color=%232d8ae0&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
-            <br>
-            <iframe width="40%" height="140"
-                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/694968424&color=%232d8ae0&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
-            <br>
-            <iframe width="40%" height="140"
-                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/694968424&color=%232d8ae0&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+        <iframe width="40%" height="140"
+            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/962338261&color=%233486c1&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+        <br>
 
-        </div>
+        <iframe width="40%" height="140"
+            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/962338252&color=%233486c1&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+        <br>
 
-        <footer class="foot">
+        <iframe width="40%" height="140"
+            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/962338249&color=%233486c1&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+        <br>
 
-            <div class="row">
-                <div class="col-3">
-                    <h1>Features</h1>
-                    <ul class="report">
-                        <a href="">
-                            <li>Overview</li>
-                        </a>
-                        <a href="">
-                            <li>Design</li>
-                        </a>
-                        <a href="">
-                            <li>Methodology</li>
-                        </a>
-                    </ul>
-                </div>
+    </div>
 
-                <div class="col-3">
-                    <h1>Contact Me</h1>
-                    <ul class="contact">
-                        <a href="mailto:raunakjha@aol.com">
-                            <li><i class="fa fa-2x fa-envelope"></i></li>
-                        </a>
-                        <a href="https://github.com/mew18">
-                            <li><i class="fa fa-2x fa-github"></i></li>
-                        </a>
-                        <a href="https://www.reddit.com/user/sgtwrecker">
-                            <li><i class="fa fa-2x fa-reddit"></i></li>
-                        </a>
-                    </ul>
-                </div>
+    <footer class="foot">
 
-                <div class="col-3">
-                    <h1>More Projects</h1>
-                    <ul class="gt-proj">
-                        <a href="https://github.com/mew18/Covid19-Prediction-Analysis-XGBoost">
-                            <li> XgBoost (COVID-19)</li>
-                        </a>
-                        <a href="https://github.com/mew18/Sentiment-Analysis-platform">
-                            <li> Sentiment Analysis</li>
-                        </a>
-                        <a href="https://github.com/mew18/Weather-Prediction-">
-                            <li> Weather prediction</li>
-                        </a>
-                    </ul>
-                </div>
-
-                <div class="col-3">
-                    <h1>Find me On</h1>
-                    <ul class="social">
-                        <a href="https://twitter.com/mrmewww">
-                            <li><i class="fa fa-2x fa-twitter"></i></li>
-                        </a>
-                        <a href="https://www.instagram.com/mew.dng/">
-                            <li><i class="fa fa-2x fa-instagram"></i></li>
-                        </a>
-                        <a href="https://steamcommunity.com/id/billipro18">
-                            <li><i class="fa fa-2x fa-steam"></i></li>
-                        </a>
-                    </ul>
-                </div>
+        <div class="row">
+            <div class="col-3">
+                <h1>Features</h1>
+                <ul class="report">
+                    <a href="https://mew18.s3.ap-south-1.amazonaws.com/mew_demo/Raunak+Minor+Project+Report.pdf">
+                        <li>Overview</li>
+                    </a>
+                    <a href="https://mew18.s3.ap-south-1.amazonaws.com/mew_demo/Raunak+Minor+Project+Report.pdf">
+                        <li>Design</li>
+                    </a>
+                    <a href="https://mew18.s3.ap-south-1.amazonaws.com/mew_demo/Raunak+Minor+Project+Report.pdf">
+                        <li>Methodology</li>
+                    </a>
+                </ul>
             </div>
-            </a>
-        </footer>
 
-        <script>
-            function dropdownMenu() {
-                var ham = document.getElementById("hambg");
-                if (ham.className === "topnav") {
-                    ham.className += " responsive";
-                }
+            <div class="col-3">
+                <h1>Contact Me</h1>
+                <ul class="contact">
+                    <a href="mailto:raunakjha@aol.com">
+                        <li><i class="fa fa-2x fa-envelope"></i></li>
+                    </a>
+                    <a href="https://github.com/mew18">
+                        <li><i class="fa fa-2x fa-github"></i></li>
+                    </a>
+                    <a href="https://www.reddit.com/user/sgtwrecker">
+                        <li><i class="fa fa-2x fa-reddit"></i></li>
+                    </a>
+                </ul>
+            </div>
 
-                else {
-                    ham.className = "topnav";
-                }
-            }
+            <div class="col-3">
+                <h1>Projects</h1>
+                <ul class="gt-proj">
+                    <a href="https://github.com/mew18/Covid19-Prediction-Analysis-XGBoost">
+                        <li> Covid 19 Prediction</li>
+                    </a>
+                    <a href="https://github.com/mew18/KRMU-TINDER-APP">
+                        <li> KRMU CAMPUS APP</li>
+                    </a>
+                    <a href="https://github.com/mew18/RGB-fy-Images">
+                        <li> Color b/w images</li>
+                    </a>
+                </ul>
+            </div>
 
-        </script>
-        
-    </body>
+            <div class="col-3">
+                <h1>Find me On</h1>
+                <ul class="social">
+                    <a href="https://twitter.com/mrmewww">
+                        <li><i class="fa fa-2x fa-twitter"></i></li>
+                    </a>
+                    <a href="https://www.instagram.com/mew.dng/">
+                        <li><i class="fa fa-2x fa-instagram"></i></li>
+                    </a>
+                    <a href="https://steamcommunity.com/id/billipro18">
+                        <li><i class="fa fa-2x fa-steam"></i></li>
+                    </a>
+                </ul>
+            </div>
+        </div>
+        </a>
+    </footer>
+
+</body>
+
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })
+
+        (window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-46794744-6', 'auto');
+    ga('send', 'pageview');
+</script>
 
 </html>
