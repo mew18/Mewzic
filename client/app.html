@@ -50,7 +50,7 @@
 
     <div class="upload">
 
-        <form action="http://127.0.0.1:5000/upload" method="POST" enctype="multipart/form-data">
+        <form action="{{url_for('upload')}}" method="POST" enctype="multipart/form-data">
 
             <label for="file" class="ip-btn">
                 <h4>Upload a midi music file </h2>
@@ -80,7 +80,7 @@
     </div>
 
     <div class="nn-process">
-        <form action="http://127.0.0.1:5000/predict" method="POST" class="process">
+        <form action="{{url_for('predict')}}" method="POST" class="process">
             <input type="submit" value="Create Music" class="pr-btn" onclick="flash()" />
         </form>
         <div class="flash">
