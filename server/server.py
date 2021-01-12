@@ -54,7 +54,7 @@ def predict():
 
 if __name__ == "__main__":
     print("SERVER started in BackGround")
-    server.run(host="127.0.0.1", port="5000", debug=False)
+    server.run(debug=True)
     
     
     
