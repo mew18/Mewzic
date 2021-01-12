@@ -18,7 +18,7 @@ def upload():
     if request.method == 'POST':
         try:
             f = request.files["file"]
-            app.instance_path = "server/"
+            app.instance_path = "server"
             uploads_dir = os.path.join(app.instance_path, 'user_data')
             # os.makedirs(uploads_dir, exist_ok=True)
             f.save(os.path.join(uploads_dir, secure_filename(f.filename)))
