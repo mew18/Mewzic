@@ -1,0 +1,7 @@
+Werkzeug==1.0.1
+music21==6.5.0
+Keras==2.4.3
+Flask==1.1.2
+numpy==1.19.5
+tensorflow==2.4.0
+gunicorn==20.0.4
