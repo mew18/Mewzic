@@ -56,11 +56,3 @@ if __name__ == "__main__":
     print("SERVER started in BackGround")
     server.run(debug=True)
     
-    
-    
-    
-    
-    
-    
-    
-    
