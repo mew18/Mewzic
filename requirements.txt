@@ -1,4 +1,4 @@
-tensorflow-cpu==2.4.0
+tensorflow-cpu==2.5.1
 gunicorn==20.0.4
 music21==6.5.0
 Keras==2.3.0
